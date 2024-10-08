@@ -5,8 +5,9 @@ from tkinter import messagebox
 class MathApp:
     def __init__(self):
         self.win = tk.Tk()
-        # self.reset_count = 0 
+        # self.reset_count = 0
         self.create_tab()
+        self.win.title("Tính toán")
         self.win.mainloop()
        
 
