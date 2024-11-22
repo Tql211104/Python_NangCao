@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danh sách sinh viên</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Danh sách sinh viên</h1>
+
+        <!-- Form tìm kiếm -->
+        <form action="/" method="GET" class="search-form">
+            <label for="search">Tìm kiếm theo tên:</label>
+            <input type="text" id="search" name="search" placeholder="Nhập tên sinh viên" class="search-input">
+            <button type="submit" class="search-button">Tìm kiếm</button>
+        </form>
+
+        <!-- Nút thêm sinh viên -->
+        <a href="/add" class="add-student-button">Thêm sinh viên</a>
+
+        <!-- Bảng danh sách sinh viên -->
+        <table class="student-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>MSSV</th>
+                    <th>Họ và Tên</th>
+                    <th>Lớp</th>
+                    <th>Địa chỉ</th>
+                    <th>Hành động</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in rows %}
+                <tr>
+                    <td>{{ row[0] }}</td>
+                    <td>{{ row[1] }}</td>
+                    <td>{{ row[2] }}</td>
+                    <td>{{ row[3] }}</td>
+                    <td>{{ row[4] }}</td>
+                    <td>
+                        <!-- Nút cập nhật -->
+                        <a href="/update/{{ row[0] }}" class="update-button">Cập nhật</a>
+
+                        <!-- Nút xóa (sử dụng POST để xóa an toàn) -->
+                        <form action="/delete/{{ row[0] }}" method="POST" style="display:inline;">
+                            <button type="submit" class="delete-button" onclick="return confirm('Bạn có chắc chắn muốn xóa?')">Xóa</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
